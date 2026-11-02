@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TechConnect Seniors</title>
+<style>
+:root {
+  --site-primary: #176b66;
+  --site-on-primary: #ffffff;
+  --site-secondary: #e3f2ee;
+  --site-on-secondary: #173d3a;
+  --site-background: #f8fbf9;
+  --site-on-background: #18312f;
+  --site-font-body: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --site-font-heading: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+#app { min-height: 100vh; width: 100%; background-color: var(--site-background); border-radius: 0; overflow: hidden; }
+a { color: inherit; }
+.wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+header { padding: 20px 0; border-bottom: 1px solid #dce8e4; background: var(--site-background); }
+.nav { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.03em; font-size:1.08rem; text-decoration:none; }
+.mark { width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:var(--site-primary); color:var(--site-on-primary); }
+.navlinks { display:flex; gap:25px; align-items:center; font-size:.93rem; }
+.navlinks a { text-decoration:none; opacity:.85; }
+.navlinks a:hover { text-decoration:underline; }
+.btn { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:999px; padding:13px 19px; background:var(--site-primary); color:var(--site-on-primary); font-weight:750; text-decoration:none; cursor:pointer; font:inherit; font-weight:750; }
+.btn.secondary { background:var(--site-secondary); color:var(--site-on-secondary); }
+.hero { padding:74px 0 68px; background:linear-gradient(125deg, #e5f3ee 0%, #f8fbf9 62%, #d8ece7 100%); position:relative; }
+.hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; }
+.eyebrow { color:#176b66; font-size:.8rem; font-weight:800; text-transform:uppercase; letter-spacing:.13em; }
+h1,h2,h3 { font-family:var(--site-font-heading); line-height:1.1; letter-spacing:-.04em; }
+h1 { font-size:clamp(2.7rem, 5.5vw, 4.7rem); margin:16px 0 20px; }
+h2 { font-size:clamp(2rem, 3.6vw, 3rem); margin:12px 0 16px; }
+h3 { font-size:1.25rem; margin:12px 0 8px; }
+p { line-height:1.7; }
+.lead { font-size:1.12rem; color:#45615d; max-width:570px; }
+.actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+.visual { min-height:350px; border-radius:28px; background:#cce5dd; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.visual svg { width:100%; max-width:480px; height:auto; position:relative; z-index:1; }
+.note { position:absolute; bottom:20px; left:20px; z-index:2; background:#fff; color:#254541; padding:13px 16px; border-radius:16px; box-shadow:0 10px 30px #1d4b4218; font-weight:700; }
+section { padding:70px 0; }
+.section-intro { max-width:650px; margin-bottom:32px; }
+.section-intro p { color:#58716d; }
+.cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.card { padding:25px; background:#fff; border:1px solid #e1ece8; border-radius:22px; }
+.icon { width:46px; height:46px; display:grid; place-items:center; border-radius:15px; background:var(--site-secondary); color:var(--site-primary); font-size:1.4rem; }
+.card p { color:#59716d; font-size:.96rem; margin-bottom:0; }
+.soft { background:#edf6f2; }
+.impact-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:50px; align-items:center; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:26px; }
+.stat { background:#fff; border-radius:18px; padding:17px 14px; border:1px solid #dce9e4; }
+.stat strong { display:block; font-size:1.7rem; color:var(--site-primary); letter-spacing:-.04em; }
+.stat span { font-size:.8rem; color:#59716d; }
+.steps { display:grid; gap:15px; }
+.step { display:flex; gap:16px; background:#fff; padding:19px; border-radius:18px; border:1px solid #dce9e4; }
+.number { flex:0 0 36px; height:36px; border-radius:50%; display:grid; place-items:center; background:var(--site-primary); color:white; font-weight:800; }
+.step p { margin:5px 0 0; color:#59716d; font-size:.94rem; }
+.cta { background:var(--site-primary); color:white; padding:54px 0; }
+.cta-grid { display:flex; justify-content:space-between; align-items:center; gap:30px; }
+.cta p { color:#d9eeea; max-width:620px; margin-bottom:0; }
+.cta .btn { background:#fff; color:#176b66; white-space:nowrap; }
+footer { padding:28px 0; font-size:.88rem; color:#607873; }
+footer .foot { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.small { font-size:.85rem; }
+@media (max-width:760px) {
+ .navlinks { display:none; }
+ .hero { padding:50px 0; }
+ .hero-grid,.impact-grid { grid-template-columns:1fr; gap:30px; }
+ .visual { min-height:280px; }
+ .cards { grid-template-columns:1fr; }
+ section { padding:52px 0; }
+ .stats { grid-template-columns:1fr 1fr; }
+ .cta-grid { align-items:flex-start; flex-direction:column; }
+}
+@media (prefers-color-scheme:dark) {
+ body,#app { background:#101b19; color:#e8f3f0; }
+ header { background:#101b19; border-color:#293b37; }
+ .hero { background:linear-gradient(125deg,#1b3530,#101b19 65%,#203e38); }
+ .lead,.section-intro p,.card p,.step p,.stat span { color:#b6cbc5; }
+ .card,.step,.stat { background:#182724; border-color:#2b403b; }
+ .soft { background:#14231f; }
+ .visual { background:#274d43; }
+ .note { background:#eaf6f1; color:#254541; }
+ footer { color:#b6cbc5; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="TechConnect Seniors home">
+      <span class="mark" aria-hidden="true">✳</span><span>TechConnect Seniors</span>
+    </a>
+    <nav class="navlinks" aria-label="Main navigation">
+      <a href="#mission">Our mission</a><a href="#programs">What we teach</a><a href="#impact">Our impact</a><a href="#get-involved">Get involved</a>
+    </nav>
+    <a class="btn" href="#get-involved">Join our mission</a>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Student-led · Community-powered</div>
+      <h1>Technology is better when we’re <span style="color:#176b66">connected.</span></h1>
+      <p class="lead">We help older adults build confidence with phones, computers, video calls, and online safety—one friendly lesson at a time.</p>
+      <div class="actions"><a class="btn" href="#get-involved">Volunteer with us ↗</a><a class="btn secondary" href="#programs">Explore our lessons</a></div>
+      <p class="small" style="color:#66817b;margin-top:20px">Free, patient, hands-on technology support for senior citizens.</p>
+    </div>
+    <div class="visual" aria-label="Illustration of a student helping a senior use a tablet">
+      <svg viewBox="0 0 500 390" role="img" aria-label="Friendly illustration of two people connecting through a tablet">
+        <circle cx="250" cy="195" r="155" fill="#b5d9cd"/>
+        <circle cx="130" cy="100" r="25" fill="#e9b48b"/><path d="M103 102 Q105 60 145 69 Q170 82 157 111 L145 91 Q125 105 103 102" fill="#5d4b40"/>
+        <path d="M72 305 Q70 190 130 184 Q190 191 190 305" fill="#176b66"/>
+        <circle cx="350" cy="100" r="27" fill="#c88965"/><path d="M323 99 Q320 58 358 65 Q390 76 378 111 L365 89 Q348 108 323 99" fill="#5d4b40"/>
+        <path d="M295 305 Q290 188 350 184 Q410 190 425 305" fill="#d9a45f"/>
+        <rect x="158" y="160" width="184" height="128" rx="17" fill="#244e48" transform="rotate(-5 250 224)"/>
+        <rect x="168" y="170" width="164" height="108" rx="10" fill="#f5fbf8" transform="rotate(-5 250 224)"/>
+        <circle cx="250" cy="220" r="24" fill="#cce5dd"/><path d="M218 260 Q220 235 250 235 Q280 235 282 260" fill="#176b66"/>
+        <path d="M185 295 Q215 274 244 291 Q270 307 302 287" fill="none" stroke="#c88965" stroke-width="19" stroke-linecap="round"/>
+        <path d="M185 295 Q215 274 244 291 Q270 307 302 287" fill="none" stroke="#e9b48b" stroke-width="11" stroke-linecap="round"/>
+        <path d="M130 145 Q170 130 200 175" fill="none" stroke="#c88965" stroke-width="17" stroke-linecap="round"/>
+        <path d="M350 145 Q320 135 300 174" fill="none" stroke="#c88965" stroke-width="17" stroke-linecap="round"/>
+        <path d="M210 90 Q250 55 290 90" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+        <circle cx="250" cy="55" r="7" fill="#fff"/>
+      </svg>
+      <div class="note">Small lessons. Stronger connections. 💚</div>
+    </div>
+  </div>
+</section>
+<section id="mission">
+  <div class="wrap">
+    <div class="section-intro">
+      <div class="eyebrow">Why we’re here</div>
+      <h2>Bridging generations through technology.</h2>
+      <p>Technology can bring people closer—but it can also feel confusing or intimidating. We pair student volunteers with older adults for welcoming, practical learning that meets each person where they are.</p>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="icon">♡</div><h3>Patient, personal support</h3><p>Every question is welcome. We go at the learner’s pace and practice together.</p></article>
+      <article class="card"><div class="icon">⌁</div><h3>Useful everyday skills</h3><p>Lessons focus on the technology people use to communicate, learn, and stay independent.</p></article>
+      <article class="card"><div class="icon">♧</div><h3>Safer digital habits</h3><p>We share practical ways to spot suspicious messages and protect private information.</p></article>
+    </div>
+  </div>
+</section>
+<section class="soft" id="programs">
+  <div class="wrap">
+    <div class="section-intro">
+      <div class="eyebrow">What we teach</div>
+      <h2>Technology made approachable.</h2>
+      <p>Our workshops are designed to be hands-on, friendly, and useful from the very first session.</p>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="icon">▣</div><h3>Phone & computer basics</h3><p>Settings, Wi-Fi, browsing, email, and getting comfortable with everyday devices.</p></article>
+      <article class="card"><div class="icon">☏</div><h3>Stay in touch</h3><p>Practice texting, sharing photos, and making video calls with family and friends.</p></article>
+      <article class="card"><div class="icon">♢</div><h3>Online safety</h3><p>Learn warning signs of scams, safer passwords, and when to ask a trusted person for help.</p></article>
+    </div>
+  </div>
+</section>
+<section id="impact">
+  <div class="wrap impact-grid">
+    <div>
+      <div class="eyebrow">Our first chapter</div>
+      <h2>Real help, one connection at a time.</h2>
+      <p>We’re building this initiative from the ground up with community partners, student volunteers, and neighbors who believe everyone deserves to feel confident using technology.</p>
+      <div class="stats">
+        <div class="stat"><strong>10</strong><span>Senior learners — first goal</span></div>
+        <div class="stat"><strong>1</strong><span>Community workshop to launch</span></div>
+        <div class="stat"><strong>$500</strong><span>Initial fundraising goal</span></div>
+      </div>
+      <p class="small" style="color:#66817b">These are launch goals, not completed results. We’ll share progress as workshops happen.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="number">1</div><div><strong>Connect with a community partner</strong><p>Work with a library, senior center, or community organization to plan a welcoming workshop.</p></div></div>
+      <div class="step"><div class="number">2</div><div><strong>Learn together</strong><p>Student volunteers offer free, small-group lessons and one-on-one practice.</p></div></div>
+      <div class="step"><div class="number">3</div><div><strong>Grow with feedback</strong><p>We listen to participants, improve our lessons, and invite more volunteers to help.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="cta" id="get-involved">
+  <div class="wrap cta-grid">
+    <div><div class="eyebrow" style="color:#c7e9df">Be part of the connection</div><h2 style="margin-top:12px">A little help can open a whole new world.</h2><p>Are you a student who wants to volunteer, a community organization interested in hosting a workshop, or someone who can support our mission?</p></div>
+    <a class="btn" href="mailto:hello@techconnectseniors.org?subject=TechConnect%20Seniors%20-%20Getting%20Involved">Contact our team ↗</a>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap foot"><div><strong>TechConnect Seniors</strong><br><span>Bridging generations through technology.</span></div><div>Student-led community initiative · Built with care</div></div>
+</footer>
+</div>
+</body>
+</html>
